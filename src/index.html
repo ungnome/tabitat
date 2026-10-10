@@ -1,13 +1,44 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<link rel="icon" type="image/png" href="icons/tabs_32.svg" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Tabitat</title>
-	</head>
-	<body class="bg-white dark:bg-neutral-800">
-		<div id="app"></div>
-		<script type="module" src="/src/main.ts"></script>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="icons/tabs_32.svg" />
+    <link rel="stylesheet" href="index.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="module" src="index.js"></script>
+    <title>Tabitat</title>
+  </head>
+  <body>
+    <div id="main-layout">
+      <div id="preview-container" class="">
+        <img id="preview" class="hidden" src="" alt="" />
+      </div>
+      <div id="tab-list-container" class="">
+        <div id="search-container">
+          <input id="search-input" type="search" name="q" placeholder="Search..." tabindex="-1" />
+        </div>
+        <ul id="tab-list">
+          <template id="tab-list-item">
+            <li
+              class="tab-list-item"
+              data-tab-id=""
+              data-tab-index=""
+              data-window-id=""
+              data-favicon=""
+              tabindex="-1">
+              <img class="tab-favicon" src="" alt="" />
+              <div class="tab-details">
+                <span class="tab-title"></span>
+                <br />
+                <span class="tab-url"></span>
+              </div>
+              <div class="tab-controls">
+                <button class="close-btn" tabindex="-1">X</button>
+              </div>
+            </li>
+          </template>
+        </ul>
+      </div>
+    </div>
+  </body>
 </html>

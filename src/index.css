@@ -1,0 +1,111 @@
+.this {
+  border: solid 1px red;
+}
+
+#tab-list-container {
+  margin: 0.4rem;
+}
+
+#tab-list {
+  margin: 0;
+  padding: 0;
+  max-height: 440px;
+  overflow-y: scroll;
+  outline: inset 2px grey;
+}
+
+.tab-list-item {
+  overflow: hidden;
+  list-style-type: none;
+  display: flex;
+  margin: 0.4rem;
+  margin-bottom: 0.6rem;
+  border: solid 1px black;
+  outline: solid 1px lightslategrey;
+}
+
+.tab-list-item:hover,
+.tab-list-item:focus {
+  outline: none;
+  box-shadow: 3px 3px 1px black;
+}
+
+.tab-favicon {
+  height: 28px;
+  align-self: center;
+  margin: 0.5rem;
+}
+
+.tab-details {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  flex: 1;
+  margin: 0.2rem;
+}
+
+.tab-controls {
+  align-self: center;
+}
+
+.tab-title {
+  margin-bottom: 0px;
+}
+
+.tab-url {
+  margin-top: 0px;
+  color: lightslategray;
+  font-style: italic;
+}
+
+.close-btn {
+  color: red;
+  display: block;
+  margin-top: 0;
+  margin-right: 0.5rem;
+  margin-bottom: 0;
+  margin-left: 0;
+  border: 1px solid black;
+}
+
+#preview-container {
+  /* margin-top: 0.3rem; */
+  /* margin-right: 0; */
+  /* margin-bottom: 0; */
+  /* margin-left: 0; */
+  margin: 0.4rem;
+  /* margin-right: 0.4rem; */
+}
+
+#preview.hidden {
+  box-shadow: none;
+  border: none;
+  display: hidden;
+}
+
+#preview {
+  width: 100%;
+  border: 1px solid lightslategray;
+}
+
+#main-layout {
+  width: 100%;
+  min-height: 200px;
+  max-height: 500px;
+  display: grid;
+  grid-template-columns: 300px 480px;
+  background: transparent;
+}
+
+#search-input {
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.2em;
+  border-radius: 0;
+  border: inset 2px black;
+}
+
+.search-not-match {
+  display: none;
+}
