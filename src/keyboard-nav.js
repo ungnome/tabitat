@@ -35,6 +35,25 @@ function globalKeybinds() {
       return;
     }
 
+    // tab start tab controls if nothing is active and down is pressed
+    if (document.activeElement === document.body) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      switch (e.key) {
+        case 'ArrowDown':
+          moveFocus('top');
+          break;
+        case 'j':
+          moveFocus('top');
+          break;
+        case 'n':
+          moveFocus('top');
+          break;
+      }
+      return;
+    }
+
     // tab list controls
     if (document.activeElement.matches('.tab-list-item')) {
       e.preventDefault();
