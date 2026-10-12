@@ -92,12 +92,14 @@ async function populateTabsList() {
     tabFavicon.addEventListener('error', handleFaviconFailure);
 
     // handle previews
-    li.addEventListener('mouseenter', () => {
-      previewTimer = setTimeout(async () => {
-        let tabPreview = await browser.tabs.captureTab(tab.id);
-        preview.src = tabPreview;
-        preview.classList.remove('hidden');
-      }, 100);
+    ['mouseenter', 'focus'].forEach((e) => {
+      li.addEventListener(e, () => {
+        previewTimer = setTimeout(async () => {
+          let tabPreview = await browser.tabs.captureTab(tab.id);
+          preview.src = tabPreview;
+          preview.classList.remove('hidden');
+        }, 100);
+      });
     });
 
     tabList.append(clone);
