@@ -1,27 +1,27 @@
 name: Release
 on:
-  workflow_dispatch:
+  release:
+    type:
+      - released
+
+env:
+  TAG: ${{ github.event.release.tag_name }}
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - name: checkout code
+        uses: actions/checkout@v7
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: latest
-          run_install: true
-
-      - name: Build and zip
+      - name: create zip
+        shell: bash
         run: |
-          pnpm run pack
+          mkdir dist
+          cd src
+          zip -r ../dist/tabitat-${TAG}.zip
 
-      - name: Create Release
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: add zip to release
+        shell: bash
         run: |
-          TAG="v$(yq -r .version package.json)"
-          gh release create "$TAG" dist/*.zip
+          gh release upload ${TAG} dist/tabitat-${TAG}.zip
