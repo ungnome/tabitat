@@ -82,7 +82,7 @@ function globalKeybinds() {
           moveFocus('down');
           break;
         case 'x':
-          closeBtn.click();
+          closeTab();
           break;
         case 'Enter':
           tab.click();
@@ -116,4 +116,29 @@ function moveFocus(direction) {
   }
 
   tabListItems[next].focus();
+}
+
+function closeTab() {
+  const ae = document.activeElement;
+  const tid = Number(ae.dataset.tabId);
+  const isTabListItem = ae.classList.contains('tab-list-item');
+  const tabListItems = Array.from(
+    document.querySelectorAll('.tab-list-item:not(.search-not-match)')
+  );
+  const i = tabListItems.indexOf(document.activeElement);
+  const isLast = i === tabListItems.length - 1 ? true : false;
+
+  if (!isTabListItem) {
+    console.error("active element isn't tab-list-item");
+    return;
+  }
+
+  if (isLast) {
+    moveFocus('up');
+  } else {
+    moveFocus('down');
+  }
+
+  browser.tabs.remove(tid);
+  ae.remove();
 }
