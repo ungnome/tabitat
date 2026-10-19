@@ -4,20 +4,14 @@ A habitat for your tabs.
 
 Tab icons created by strip - [Flaticon](https://www.flaticon.com/free-icons/tab)
 
-## Development
+No dependencies, pure HTML, CSS, and JS.
 
-#### Requirements
+## Build
 
-| Dependency | Version |
-| ---------- | ------- |
-| `NodeJS`   | 16+     |
-| `pnpm`     | 7+      |
+output will be dist/tabitat.zip
 
-## Build Instructions
-
-The output zip file will be in the `dist` folder.
-
-```
-pnpm install
-pnpm run pack
+```bash
+mkdir dist
+cd src
+zip -r ../dist/tabitat.zip ./
 ```
