@@ -1,18 +1,39 @@
-name: Release
+name: release
 on:
   release:
     type:
       - released
-
-env:
-  TAG: ${{ github.event.release.tag_name }}
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag to add release files to
+        required: true
+        type: string
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+      - name: determine tag
+        env:
+          TRIGGER: ${{ github.event_name }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          DISPATCH_TAG: ${{ inputs.tag }}
+        shell: bash
+        run: |
+          if [[ $TRIGGER -eq "release"  ]]; then
+            echo "TAG=${RELEASE_TAG}" >> "$GITHUB_ENV"
+          elif [[ $TRIGGER -eq "workflow_dispatch" ]]; then
+            echo "TAG=${DISPATCH_TAG}" >> "$GITHUB_ENV"
+          else
+            echo "could not determine tag"
+            exit 1
+          fi
+
       - name: checkout code
         uses: actions/checkout@v7
+        with:
+          ref: ${{ env.TAG }}
 
       - name: create zip
         shell: bash
