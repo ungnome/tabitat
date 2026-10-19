@@ -19,7 +19,7 @@ jobs:
         run: |
           mkdir dist
           cd src
-          zip -r ../dist/tabitat-${TAG}.zip
+          zip -r ../dist/tabitat-${TAG}.zip ./
 
       - name: add zip to release
         shell: bash
