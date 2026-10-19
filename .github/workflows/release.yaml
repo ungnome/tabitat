@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: determine tag
+        id: determine-tag
         env:
           TRIGGER: ${{ github.event_name }}
           RELEASE_TAG: ${{ github.event.release.tag_name }}
@@ -22,9 +23,9 @@ jobs:
         shell: bash
         run: |
           if [[ $TRIGGER -eq "release"  ]]; then
-            echo "TAG=${RELEASE_TAG}" >> "$GITHUB_ENV"
+            echo "tag=${RELEASE_TAG}" >> "$GITHUB_OUTPUT"
           elif [[ $TRIGGER -eq "workflow_dispatch" ]]; then
-            echo "TAG=${DISPATCH_TAG}" >> "$GITHUB_ENV"
+            echo "tag=${DISPATCH_TAG}" >> "$GITHUB_OUTPUT"
           else
             echo "could not determine tag"
             exit 1
@@ -33,16 +34,14 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v7
         with:
-          ref: ${{ env.TAG }}
+          ref: ${{ steps.determine-tag.outputs.tag }}
 
-      - name: create zip
+      - name: upload zip
         shell: bash
+        env:
+          TAG: ${{ steps.determine-tag.outputs.tag }}
         run: |
           mkdir dist
           cd src
           zip -r ../dist/tabitat-${TAG}.zip ./
-
-      - name: add zip to release
-        shell: bash
-        run: |
-          gh release upload ${TAG} dist/tabitat-${TAG}.zip
+          gh release upload ${TAG} ../dist/tabitat-${TAG}.zip
