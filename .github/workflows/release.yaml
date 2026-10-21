@@ -38,6 +38,8 @@ jobs:
 
       - name: upload zip
         shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           mkdir dist
           cd src
