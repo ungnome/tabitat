@@ -22,9 +22,9 @@ jobs:
           DISPATCH_TAG: ${{ inputs.tag }}
         shell: bash
         run: |
-          if [[ $TRIGGER -eq "release"  ]]; then
+          if [[ "$TRIGGER" == "release"  ]]; then
             echo "TAG=${RELEASE_TAG}" >> $GITHUB_ENV
-          elif [[ $TRIGGER -eq "workflow_dispatch" ]]; then
+          elif [[ "$TRIGGER" == "workflow_dispatch" ]]; then
             echo "TAG=${DISPATCH_TAG}" >> $GITHUB_ENV
           else
             echo "could not determine tag"
